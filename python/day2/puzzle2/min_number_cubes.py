@@ -1,16 +1,3 @@
-def is_possible_game(game, red, green, blue):
-    """
-    Return True if game is a possible game, False otherwise.
-    :param game: a game (list of tuples (red, green, blue))
-    :param red: number of red cubes available
-    :param green: number of green cubes available
-    :param blue: number of blue cubes available
-    """
-    for (r, g, b) in game:
-        if r > red or g > green or b > blue:
-            return False
-    return True
-
 def parse_input():
     """
     Parse input into a list of games. Each game is a list of tuples (red, green, blue).
