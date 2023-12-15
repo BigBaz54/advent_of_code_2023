@@ -81,19 +81,21 @@ def do_one_cycle(map_):
     return map_
 
 def do_n_cycle(map_, n):
-    maps = {map_to_str(map_): 0}
+    maps_occ = {map_to_str(map_): 0}
+    maps = [map_]
     cycles_done = 0
     while cycles_done < n:
         map_ = do_one_cycle(map_)
         cycles_done += 1
         s = map_to_str(map_)
-        if s in maps:
+        if s in list(maps_occ.keys())[::-1]:
             # We found a cycle
-            cycle_length = cycles_done - maps[s]
+            cycle_length = cycles_done - maps_occ[s]
             cycles_left = n - cycles_done
-            cycles_done += cycles_left // cycle_length * cycle_length
+            return maps[cycles_done - cycle_length + cycles_left % cycle_length]
         else:
-            maps[s] = cycles_done
+            maps_occ[s] = cycles_done
+            maps.append(map_)
     return map_
 
 def total_load(map_):
